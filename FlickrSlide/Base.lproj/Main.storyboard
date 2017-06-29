@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FlickrSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +20,55 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-z8-MLP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KJ-1F-vpD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45N-D9-Rrz">
+                                        <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="1V3-0L-cgE"/>
+                                            <constraint firstAttribute="width" constant="100" id="eIp-cm-agG"/>
+                                        </constraints>
+                                        <state key="normal" title="시작">
+                                            <color key="titleColor" red="0.049000161917098439" green="0.049000161917098439" blue="0.049000161917098439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startSlideShow" destination="BYZ-38-t0r" eventType="touchUpInside" id="btn-fs-wG1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="45N-D9-Rrz" firstAttribute="centerX" secondItem="5KJ-1F-vpD" secondAttribute="centerX" id="x6q-gt-zaf"/>
+                                    <constraint firstItem="45N-D9-Rrz" firstAttribute="centerY" secondItem="5KJ-1F-vpD" secondAttribute="centerY" id="xQI-dl-7FG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="H0Y-z8-MLP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="0Us-CJ-ja4"/>
+                            <constraint firstItem="5KJ-1F-vpD" firstAttribute="top" secondItem="H0Y-z8-MLP" secondAttribute="top" id="1zh-ZE-sJs"/>
+                            <constraint firstItem="5KJ-1F-vpD" firstAttribute="leading" secondItem="H0Y-z8-MLP" secondAttribute="leading" id="OUt-FK-LTq"/>
+                            <constraint firstAttribute="trailing" secondItem="5KJ-1F-vpD" secondAttribute="trailing" id="V3b-wD-kJ1"/>
+                            <constraint firstItem="5KJ-1F-vpD" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="ZXy-s8-zkk"/>
+                            <constraint firstItem="H0Y-z8-MLP" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Zgb-oE-V0I"/>
+                            <constraint firstItem="H0Y-z8-MLP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dxP-eh-36Z"/>
+                            <constraint firstItem="H0Y-z8-MLP" firstAttribute="trailing" secondItem="5KJ-1F-vpD" secondAttribute="trailing" id="vRN-G7-qN6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="initialView" destination="5KJ-1F-vpD" id="oD0-7Y-ujZ"/>
+                        <outlet property="sliderView" destination="H0Y-z8-MLP" id="Fra-KM-9Lf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>

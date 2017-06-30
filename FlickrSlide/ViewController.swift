@@ -8,11 +8,15 @@
 
 import UIKit
 import SWXMLHash
+import Kingfisher
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var sliderView: UIView!
+    @IBOutlet weak var startBtn: UIButton!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var photoView: UIImageView!
     
     var photoArr: [[String:String]]!
 
@@ -31,8 +35,30 @@ class ViewController: UIViewController {
      // MARK: - Action handler for 시작 button
      */
     @IBAction func startSlideShow() {
-        print("hehe")
+        
+        switchView()
+        
+        setSliderView()
+        
     }
+    
+    func switchView() {
+        
+        startBtn.isHidden = true
+    }
+    
+    func setSliderView() {
+        
+        titleLabel.text = photoArr[0]["title"]
+        
+        photoView.contentMode = .scaleAspectFit
+        let url = URL(string: photoArr[0]["url"]!)
+        if let url = url {
+            
+            photoView.kf.setImage(with: url, placeholder: nil, options: [.transition(ImageTransition.fade(0.5))])
+        }
+    }
+    
     
     /*
      // MARK: - fetch public feed model by Flickr API
@@ -42,7 +68,7 @@ class ViewController: UIViewController {
         RequestHelper.shared.requestGet("https://api.flickr.com/services/feeds/photos_public.gne") {
             isSuccess, result in
             
-            if let result = result {
+            if let result = result, isSuccess == true {
                 
                 self.photoArr = self.manipulateModel(result)
             }
@@ -73,6 +99,12 @@ class ViewController: UIViewController {
         }
         
         return tmpArr
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        titleLabel.setNeedsUpdateConstraints()
+        photoView.setNeedsUpdateConstraints()
     }
 }
 

@@ -42,5 +42,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SFText-Heavy.otf</string>
+		<string>SFText-Regular.otf</string>
+	</array>
 </dict>
 </plist>

@@ -12,18 +12,29 @@ import Kingfisher
 
 class ViewController: UIViewController {
     
+    
     @IBOutlet weak var sliderView: UIView!
-    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var startBtn: CustomButton!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
     
+    enum ArrayPosition {
+        case current
+        case next
+    }
+    
     var photoArr: [[String:String]]!
-
+    var nextPageArr: [[String:String]]!
+    
+    var timerIsOn: Bool = false
+    var currentIndex = 0
+    var warmUpCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
+        fetchData(target: ArrayPosition.current)
         
     }
 
@@ -36,41 +47,29 @@ class ViewController: UIViewController {
      */
     @IBAction func startSlideShow() {
         
-        switchView()
+        startBtn.addIndicatorView(style: .gray)
+        startBtn.toggleIndicatorView(willRun: true)
         
-        setSliderView()
+        warmUp(target: ArrayPosition.current)
         
     }
-    
-    func switchView() {
-        
-        startBtn.isHidden = true
-    }
-    
-    func setSliderView() {
-        
-        titleLabel.text = photoArr[0]["title"]
-        
-        photoView.contentMode = .scaleAspectFit
-        let url = URL(string: photoArr[0]["url"]!)
-        if let url = url {
-            
-            photoView.kf.setImage(with: url, placeholder: nil, options: [.transition(ImageTransition.fade(0.5))])
-        }
-    }
-    
     
     /*
      // MARK: - fetch public feed model by Flickr API
      */
-    func fetchData() {
+    func fetchData(target: ArrayPosition, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
         RequestHelper.shared.requestGet("https://api.flickr.com/services/feeds/photos_public.gne") {
             isSuccess, result in
             
             if let result = result, isSuccess == true {
                 
-                self.photoArr = self.manipulateModel(result)
+                if target == ArrayPosition.current {
+                    self.photoArr = self.manipulateModel(result)
+                } else {
+                    self.nextPageArr = self.manipulateModel(result)
+                    completion!(true)
+                }
             }
         }
     }

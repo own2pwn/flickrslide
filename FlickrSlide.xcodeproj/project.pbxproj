@@ -15,6 +15,11 @@
 		4F8908AB1F04DC0600F838FB /* FlickrSlideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8908AA1F04DC0600F838FB /* FlickrSlideTests.swift */; };
 		4F8908B61F04DC0600F838FB /* FlickrSlideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8908B51F04DC0600F838FB /* FlickrSlideUITests.swift */; };
 		4FC740301F04E65E001121DA /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC7402F1F04E65E001121DA /* RequestHelper.swift */; };
+		4FC740351F0643FC001121DA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740341F0643FC001121DA /* CustomButton.swift */; };
+		4FC740371F064A94001121DA /* SliderSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740361F064A94001121DA /* SliderSetting.swift */; };
+		4FC7403E1F064BD9001121DA /* SFText-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7403C1F064BD9001121DA /* SFText-Heavy.otf */; };
+		4FC7403F1F064BD9001121DA /* SFText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7403D1F064BD9001121DA /* SFText-Regular.otf */; };
+		4FC740411F064C18001121DA /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740401F064C18001121DA /* CustomLabel.swift */; };
 		9AAC9134B8B9DF85DD1AAA4F /* Pods_FlickrSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD6981FE4BA326BCBF7039 /* Pods_FlickrSlide.framework */; };
 		C42E656F127B9B6E953E64C5 /* Pods_FlickrSlide_FlickrSlideTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FD58BBE6F624DC035B7886 /* Pods_FlickrSlide_FlickrSlideTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +58,11 @@
 		4F8908B51F04DC0600F838FB /* FlickrSlideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSlideUITests.swift; sourceTree = "<group>"; };
 		4F8908B71F04DC0600F838FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC7402F1F04E65E001121DA /* RequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestHelper.swift; path = Helper/RequestHelper.swift; sourceTree = "<group>"; };
+		4FC740341F0643FC001121DA /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = Common/CustomController/CustomButton.swift; sourceTree = "<group>"; };
+		4FC740361F064A94001121DA /* SliderSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderSetting.swift; path = SliderGroup/SliderSetting.swift; sourceTree = "<group>"; };
+		4FC7403C1F064BD9001121DA /* SFText-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Heavy.otf"; path = "Resources/Font/SFText-Heavy.otf"; sourceTree = "<group>"; };
+		4FC7403D1F064BD9001121DA /* SFText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Regular.otf"; path = "Resources/Font/SFText-Regular.otf"; sourceTree = "<group>"; };
+		4FC740401F064C18001121DA /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLabel.swift; path = Common/CustomController/CustomLabel.swift; sourceTree = "<group>"; };
 		8F994A68A33A697739AD56A7 /* Pods-FlickrSlide-FlickrSlideTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlide-FlickrSlideTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlide-FlickrSlideTests/Pods-FlickrSlide-FlickrSlideTests.release.xcconfig"; sourceTree = "<group>"; };
 		93875D91AE1D5BC61D29E296 /* Pods-FlickrSlide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlide/Pods-FlickrSlide.debug.xcconfig"; sourceTree = "<group>"; };
 		B5DD6981FE4BA326BCBF7039 /* Pods_FlickrSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,10 +132,11 @@
 		4F8908941F04DC0600F838FB /* FlickrSlide */ = {
 			isa = PBXGroup;
 			children = (
+				4FC7403A1F064BA7001121DA /* Resources */,
 				4FC7402E1F04E324001121DA /* Helper */,
 				4FC7402D1F04E315001121DA /* Common */,
+				4FC740321F064355001121DA /* SliderGroup */,
 				4F8908951F04DC0600F838FB /* AppDelegate.swift */,
-				4F8908971F04DC0600F838FB /* ViewController.swift */,
 				4F8908991F04DC0600F838FB /* Main.storyboard */,
 				4F89089C1F04DC0600F838FB /* Assets.xcassets */,
 				4F89089E1F04DC0600F838FB /* LaunchScreen.storyboard */,
@@ -155,6 +166,7 @@
 		4FC7402D1F04E315001121DA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4FC740331F0643E5001121DA /* CustomController */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -165,6 +177,41 @@
 				4FC7402F1F04E65E001121DA /* RequestHelper.swift */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		4FC740321F064355001121DA /* SliderGroup */ = {
+			isa = PBXGroup;
+			children = (
+				4F8908971F04DC0600F838FB /* ViewController.swift */,
+				4FC740361F064A94001121DA /* SliderSetting.swift */,
+			);
+			name = SliderGroup;
+			sourceTree = "<group>";
+		};
+		4FC740331F0643E5001121DA /* CustomController */ = {
+			isa = PBXGroup;
+			children = (
+				4FC740341F0643FC001121DA /* CustomButton.swift */,
+				4FC740401F064C18001121DA /* CustomLabel.swift */,
+			);
+			name = CustomController;
+			sourceTree = "<group>";
+		};
+		4FC7403A1F064BA7001121DA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FC7403B1F064BAC001121DA /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		4FC7403B1F064BAC001121DA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4FC7403C1F064BD9001121DA /* SFText-Heavy.otf */,
+				4FC7403D1F064BD9001121DA /* SFText-Regular.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		DF87B94B7B03E7BD799C205D /* Frameworks */ = {
@@ -294,7 +341,9 @@
 			files = (
 				4F8908A01F04DC0600F838FB /* LaunchScreen.storyboard in Resources */,
 				4F89089D1F04DC0600F838FB /* Assets.xcassets in Resources */,
+				4FC7403F1F064BD9001121DA /* SFText-Regular.otf in Resources */,
 				4F89089B1F04DC0600F838FB /* Main.storyboard in Resources */,
+				4FC7403E1F064BD9001121DA /* SFText-Heavy.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,8 +461,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC740351F0643FC001121DA /* CustomButton.swift in Sources */,
+				4FC740411F064C18001121DA /* CustomLabel.swift in Sources */,
 				4FC740301F04E65E001121DA /* RequestHelper.swift in Sources */,
 				4F8908981F04DC0600F838FB /* ViewController.swift in Sources */,
+				4FC740371F064A94001121DA /* SliderSetting.swift in Sources */,
 				4F8908961F04DC0600F838FB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

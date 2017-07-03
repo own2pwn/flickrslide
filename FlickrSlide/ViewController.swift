@@ -16,8 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var sliderView: UIView!
     @IBOutlet weak var startBtn: CustomButton!
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var publishedLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var settingBtn: UIButton!
     
     enum ArrayPosition {
         case current
@@ -31,8 +34,14 @@ class ViewController: UIViewController {
     var currentIndex = 0
     var warmUpCount = 0
     
+    var sliderTimer: Timer!
+    var timerDescriptor: Int = 0
+    var timerInterval: Double = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initializeVc()
         
         fetchData(target: ArrayPosition.current)
         
@@ -42,15 +51,47 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func initializeVc() {
+        
+        photoView.contentMode = .scaleAspectFit
+        
+        timerLabel.font = UIFont(name: "SFUIText-Heavy", size: 18)
+        timerLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
+        
+        titleLabel.font = UIFont(name: "SFUIText-Heavy", size: 22)
+        titleLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 2
+        
+        publishedLabel.font = UIFont(name: "SFUIText-Regular", size: 12)
+        publishedLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
+        publishedLabel.lineBreakMode = .byWordWrapping
+        publishedLabel.numberOfLines = 0
+        
+        let titleAttributedString = NSMutableAttributedString(string: "시작" as String)
+        titleAttributedString.addAttributes([NSForegroundColorAttributeName: UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1),
+                                             NSFontAttributeName: UIFont(name: "SFUIText-Heavy", size: 22)!], range: NSMakeRange(0, titleAttributedString.length))
+        startBtn.setAttributedTitle(titleAttributedString, for: .normal)
+        
+    }
+    
     /*
      // MARK: - Action handler for 시작 button
      */
     @IBAction func startSlideShow() {
         
+        startBtn.setTitle("", for: .normal)
         startBtn.addIndicatorView(style: .gray)
         startBtn.toggleIndicatorView(willRun: true)
         
         warmUp(target: ArrayPosition.current)
+        
+    }
+    
+    /*
+     // MARK: - Action handler for Setting button
+     */
+    @IBAction func showTimerSetting() {
         
     }
     
@@ -90,6 +131,7 @@ class ViewController: UIViewController {
                     if let url = link.element?.attribute(by: "href")?.text {
                         
                         let model = ["title": item["title"].element?.text,
+                                     "published": item["published"].element?.text,
                                      "url": url]
                         tmpArr.append(model as! [String : String])
                     }

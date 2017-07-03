@@ -45,7 +45,6 @@ extension ViewController {
                 
                 startBtn.isHidden = true
                 
-                setSliderView()
                 playSlider()
             }
             
@@ -54,17 +53,14 @@ extension ViewController {
         }
     }
     
-    func setSliderView() {
-        
-        titleLabel.text = photoArr[currentIndex]["title"]
-        
-        setModelInSliderView()
-    }
-    
     func playSlider() {
         
         if !timerIsOn {
-            Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(moveNextFeed), userInfo: nil, repeats: true)
+            
+            titleLabel.text = photoArr[currentIndex]["title"]
+            setModelInSliderView()
+            
+            Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(moveNextFeed), userInfo: nil, repeats: true)
         }
         
         timerIsOn = true
@@ -88,17 +84,52 @@ extension ViewController {
     
     func setModelInSliderView() {
         
-        photoView.contentMode = .scaleAspectFit
+        timerDescriptor = Int(timerInterval)
+        timerDescription()
+        if let timer = sliderTimer, timer.isValid {
+            timer.invalidate()
+        }
+        sliderTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerDescription), userInfo: nil, repeats: true)
         
-        let url = URL(string: photoArr[currentIndex]["url"]!)
-        if let url = url {
+        
+        UIView.animate(withDuration: 0.1, animations: {
             
-            photoView.kf.setImage(with: url, placeholder: nil, options: nil)
+            self.photoView.alpha = 0
+            self.titleLabel.alpha = 0
+            self.publishedLabel.alpha = 0
+        }) {
+            _ in
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                
+                let url = URL(string: self.photoArr[self.currentIndex]["url"]!)
+                if let url = url {
+                    
+                    self.photoView.kf.setImage(with: url, placeholder: nil, options: nil)
+                }
+                
+                self.titleLabel.text = self.photoArr[self.currentIndex]["title"]?.nvr("untitled")
+                
+                let formattedDate = DateHelper.shared.convertDateFormat(self.photoArr[self.currentIndex]["published"]!,
+                                                    currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                    convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
+                self.publishedLabel.text = "Published at \(formattedDate)"
+                
+                self.photoView.alpha = 1
+                self.titleLabel.alpha = 1
+                self.publishedLabel.alpha = 1
+            })
         }
         
-        titleLabel.text = photoArr[currentIndex]["title"]
-        
         currentIndex += 1
+    }
+    
+    func timerDescription() {
+        
+        if timerDescriptor >= 1 {
+            timerLabel.text = "\(timerDescriptor)"
+            timerDescriptor -= 1
+        }
     }
     
     func swapArray() {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F0CB24E1F0A451500E3AEF2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CB24D1F0A451500E3AEF2 /* StringExtension.swift */; };
+		4F0CB2521F0A586000E3AEF2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CB2511F0A586000E3AEF2 /* SettingView.swift */; };
 		4F8908961F04DC0600F838FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8908951F04DC0600F838FB /* AppDelegate.swift */; };
 		4F8908981F04DC0600F838FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8908971F04DC0600F838FB /* ViewController.swift */; };
 		4F89089B1F04DC0600F838FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8908991F04DC0600F838FB /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		06B9B7BB130F7DFA53733B82 /* Pods-FlickrSlide-FlickrSlideTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSlide-FlickrSlideTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSlide-FlickrSlideTests/Pods-FlickrSlide-FlickrSlideTests.debug.xcconfig"; sourceTree = "<group>"; };
 		37FD58BBE6F624DC035B7886 /* Pods_FlickrSlide_FlickrSlideTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrSlide_FlickrSlideTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0CB24D1F0A451500E3AEF2 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Common/Extension/StringExtension.swift; sourceTree = "<group>"; };
+		4F0CB2511F0A586000E3AEF2 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = SliderGroup/SettingView.swift; sourceTree = "<group>"; };
 		4F8908921F04DC0600F838FB /* FlickrSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8908951F04DC0600F838FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8908971F04DC0600F838FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				4F8908971F04DC0600F838FB /* ViewController.swift */,
 				4FC740361F064A94001121DA /* SliderSetting.swift */,
+				4F0CB2511F0A586000E3AEF2 /* SettingView.swift */,
 			);
 			name = SliderGroup;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				4FC740351F0643FC001121DA /* CustomButton.swift in Sources */,
 				4FC740411F064C18001121DA /* CustomLabel.swift in Sources */,
 				4FC740301F04E65E001121DA /* RequestHelper.swift in Sources */,
+				4F0CB2521F0A586000E3AEF2 /* SettingView.swift in Sources */,
 				4F8908981F04DC0600F838FB /* ViewController.swift in Sources */,
 				4F0CB24E1F0A451500E3AEF2 /* StringExtension.swift in Sources */,
 				4FC740371F064A94001121DA /* SliderSetting.swift in Sources */,

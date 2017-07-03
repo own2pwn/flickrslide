@@ -12,7 +12,6 @@ import Kingfisher
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet weak var sliderView: UIView!
     @IBOutlet weak var startBtn: CustomButton!
     
@@ -38,6 +37,13 @@ class ViewController: UIViewController {
     var timerDescriptor: Int = 0
     var timerInterval: Double = 5
     
+    let alertWrapper = UIView()
+    let dimBackgroundView = UIView()
+    let alertView = UIView()
+    let timeIntervalLabel = UILabel()
+    let slidingView = UISlider()
+    let alertAction1Btn = UIButton(type: .custom)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +62,7 @@ class ViewController: UIViewController {
         photoView.contentMode = .scaleAspectFit
         
         timerLabel.font = UIFont(name: "SFUIText-Heavy", size: 18)
-        timerLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
+        timerLabel.textColor = UIColor.black
         
         titleLabel.font = UIFont(name: "SFUIText-Heavy", size: 22)
         titleLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
@@ -72,6 +78,8 @@ class ViewController: UIViewController {
         titleAttributedString.addAttributes([NSForegroundColorAttributeName: UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1),
                                              NSFontAttributeName: UIFont(name: "SFUIText-Heavy", size: 22)!], range: NSMakeRange(0, titleAttributedString.length))
         startBtn.setAttributedTitle(titleAttributedString, for: .normal)
+        
+        drawAlertView()
         
     }
     
@@ -93,6 +101,7 @@ class ViewController: UIViewController {
      */
     @IBAction func showTimerSetting() {
         
+        showTimerIntervalSetting()
     }
     
     /*

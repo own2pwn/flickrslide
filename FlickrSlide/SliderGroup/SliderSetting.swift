@@ -78,7 +78,7 @@ extension ViewController {
         }
         
         if currentIndex == photoArr.count {
-            swapArray()
+            transitArray()
         }
     }
     
@@ -132,12 +132,17 @@ extension ViewController {
         }
     }
     
-    func swapArray() {
+    func transitArray() {
         
         photoArr = nextPageArr
         nextPageArr = nil
         currentIndex = 0
-        print("swap!")
+        print("swap! preloaded => current")
+    }
+    
+    func showTimerIntervalSetting() {
+
+        presentAlertView()
     }
     
 }

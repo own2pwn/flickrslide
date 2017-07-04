@@ -139,9 +139,12 @@ extension ViewController {
         
         timerDescriptor = Int(timerInterval)
         timerDescription()
+        
         if let timer = countTimer, timer.isValid {
+            
             timer.invalidate()
         }
+        
         countTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerDescription), userInfo: nil, repeats: true)
     }
     
@@ -155,10 +158,27 @@ extension ViewController {
     
     func transitArray() {
         
+        purgeImageCache(arr: photoArr)
+        
         photoArr = nextPageArr
         nextPageArr = nil
         currentIndex = 0
         print("preloaded => current")
+    }
+    
+    func purgeImageCache(arr: [[String:String]]) {
+        
+        if arr.count > 0 {
+            
+            for item in arr {
+                
+                if let url = item["url"] {
+                    
+                    ImageCache.default.removeImage(forKey: url, fromDisk: false)
+                }
+            }
+        }
+        print("purged!")
     }
     
     func updateTimerInterval() {

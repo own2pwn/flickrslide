@@ -107,7 +107,7 @@ extension ViewController {
     }
     
     func presentAlertView() {
-        self.alertWrapper.alpha = 1
+        
         UIView.animate(withDuration: 0.2, animations: {
             self.alertWrapper.alpha = 1
         })

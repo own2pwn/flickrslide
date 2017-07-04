@@ -51,6 +51,7 @@ extension ViewController {
             if target == ArrayPosition.current {
                 
                 if startBtn.isRunning() == true {
+                    
                     startBtn.toggleIndicatorView(willRun: false)
                 }
                 
@@ -69,7 +70,6 @@ extension ViewController {
         if !timerIsOn {
             
             moveNextFeed()
-            
             activateSliderTimer()
         }
         
@@ -83,11 +83,13 @@ extension ViewController {
         if currentIndex == 2 {
             
             fetchData(target: ArrayPosition.next) { _ in
+                
                 self.warmUp(target: ArrayPosition.next)
             }
         }
         
         if currentIndex == photoArr.count {
+            
             transitArray()
         }
     }
@@ -97,28 +99,28 @@ extension ViewController {
         activateCountTimer()
         
         UIView.animate(withDuration: 0.2, animations: {
-        
+            
             self.photoView.alpha = 0
             self.titleLabel.alpha = 0
             self.publishedLabel.alpha = 0
+            
         })
         
         UIView.animate(withDuration: 0.2, animations: {
-        
+            
             self.photoView.alpha = 1
             self.titleLabel.alpha = 1
             self.publishedLabel.alpha = 1
             
-            DispatchQueue.global(qos: .userInitiated).async {
-                DispatchQueue.main.async {
-                    self.titleLabel.text = self.photoArr[self.currentIndex]["title"]?.nvr("untitled")
-                    
-                    let formattedDate = DateHelper.shared.convertDateFormat(self.photoArr[self.currentIndex]["published"]!,
-                                                                            currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
-                                                                            convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
-                    self.publishedLabel.text = "Published at \(formattedDate)"
-                }
-            }
+            self.titleLabel.text = self.photoArr[self.currentIndex]["title"]?.nvr("untitled")
+            
+            let formattedDate = DateHelper.shared.convertDateFormat(self.photoArr[self.currentIndex]["published"]!,
+                                                                    currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                    convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
+            self.publishedLabel.text = "Published at \(formattedDate)"
+            
+            self.titleLabel.setNeedsUpdateConstraints()
+            self.publishedLabel.setNeedsUpdateConstraints()
             
             let url = URL(string: self.photoArr[self.currentIndex]["url"]!)
             if let url = url {

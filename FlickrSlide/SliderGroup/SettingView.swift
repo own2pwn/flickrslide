@@ -17,6 +17,7 @@ extension ViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissAlertView))
         tapGesture.numberOfTapsRequired = 1
+
         dimBackgroundView.addGestureRecognizer(tapGesture)
         dimBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.4)
         alertWrapper.addSubview(dimBackgroundView)
@@ -27,7 +28,6 @@ extension ViewController {
         alertView.layer.shadowOpacity = 0.5
         alertView.layer.shadowOffset = CGSize.zero
         alertView.layer.shadowRadius = 10
-        alertView.layer.shouldRasterize = true
         alertWrapper.addSubview(alertView)
         
         let titleAttributedString = NSMutableAttributedString(string: "설정" as String)
@@ -74,8 +74,8 @@ extension ViewController {
         
         alertView.widthAnchor.constraint(equalToConstant: 260).isActive = true
         alertView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        alertView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        alertView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        alertView.centerXAnchor.constraint(equalTo: alertWrapper.centerXAnchor).isActive = true
+        alertView.centerYAnchor.constraint(equalTo: alertWrapper.centerYAnchor).isActive = true
         
         slidingView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -96,6 +96,7 @@ extension ViewController {
         alertAction1Btn.trailingAnchor.constraint(equalTo: slidingView.trailingAnchor).isActive = true
         alertAction1Btn.topAnchor.constraint(equalTo: slidingView.bottomAnchor, constant: 12).isActive = true
         
+        alertWrapper.setNeedsUpdateConstraints()
     }
     
     func dismissAlertView() {
@@ -106,7 +107,7 @@ extension ViewController {
     }
     
     func presentAlertView() {
-        
+        self.alertWrapper.alpha = 1
         UIView.animate(withDuration: 0.2, animations: {
             self.alertWrapper.alpha = 1
         })

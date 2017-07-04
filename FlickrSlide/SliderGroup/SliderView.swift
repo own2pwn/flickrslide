@@ -137,7 +137,7 @@ extension ViewController {
         photoArr = nextPageArr
         nextPageArr = nil
         currentIndex = 0
-        print("swap! preloaded => current")
+        print("preloaded => current")
     }
     
     func showTimerIntervalSetting() {

@@ -18,7 +18,7 @@
 		4F8908B61F04DC0600F838FB /* FlickrSlideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8908B51F04DC0600F838FB /* FlickrSlideUITests.swift */; };
 		4FC740301F04E65E001121DA /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC7402F1F04E65E001121DA /* RequestHelper.swift */; };
 		4FC740351F0643FC001121DA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740341F0643FC001121DA /* CustomButton.swift */; };
-		4FC740371F064A94001121DA /* SliderSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740361F064A94001121DA /* SliderSetting.swift */; };
+		4FC740371F064A94001121DA /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740361F064A94001121DA /* SliderView.swift */; };
 		4FC7403E1F064BD9001121DA /* SFText-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7403C1F064BD9001121DA /* SFText-Heavy.otf */; };
 		4FC7403F1F064BD9001121DA /* SFText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7403D1F064BD9001121DA /* SFText-Regular.otf */; };
 		4FC740411F064C18001121DA /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC740401F064C18001121DA /* CustomLabel.swift */; };
@@ -64,7 +64,7 @@
 		4F8908B71F04DC0600F838FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC7402F1F04E65E001121DA /* RequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestHelper.swift; path = Helper/RequestHelper.swift; sourceTree = "<group>"; };
 		4FC740341F0643FC001121DA /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = Common/CustomController/CustomButton.swift; sourceTree = "<group>"; };
-		4FC740361F064A94001121DA /* SliderSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderSetting.swift; path = SliderGroup/SliderSetting.swift; sourceTree = "<group>"; };
+		4FC740361F064A94001121DA /* SliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderView.swift; path = SliderGroup/SliderView.swift; sourceTree = "<group>"; };
 		4FC7403C1F064BD9001121DA /* SFText-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Heavy.otf"; path = "Resources/Font/SFText-Heavy.otf"; sourceTree = "<group>"; };
 		4FC7403D1F064BD9001121DA /* SFText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Regular.otf"; path = "Resources/Font/SFText-Regular.otf"; sourceTree = "<group>"; };
 		4FC740401F064C18001121DA /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLabel.swift; path = Common/CustomController/CustomLabel.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8908971F04DC0600F838FB /* ViewController.swift */,
-				4FC740361F064A94001121DA /* SliderSetting.swift */,
+				4FC740361F064A94001121DA /* SliderView.swift */,
 				4F0CB2511F0A586000E3AEF2 /* SettingView.swift */,
 			);
 			name = SliderGroup;
@@ -484,7 +484,7 @@
 				4F0CB2521F0A586000E3AEF2 /* SettingView.swift in Sources */,
 				4F8908981F04DC0600F838FB /* ViewController.swift in Sources */,
 				4F0CB24E1F0A451500E3AEF2 /* StringExtension.swift in Sources */,
-				4FC740371F064A94001121DA /* SliderSetting.swift in Sources */,
+				4FC740371F064A94001121DA /* SliderView.swift in Sources */,
 				4FC740481F0A3145001121DA /* DateHelper.swift in Sources */,
 				4F8908961F04DC0600F838FB /* AppDelegate.swift in Sources */,
 			);

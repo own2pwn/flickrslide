@@ -151,10 +151,11 @@ class ViewController: UIViewController {
         return tmpArr
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        titleLabel.setNeedsUpdateConstraints()
-        photoView.setNeedsUpdateConstraints()
+    /*
+     // MARK:- View Controller methods
+     */
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .all
     }
 }
 

@@ -30,10 +30,11 @@ class ViewController: UIViewController {
     var nextPageArr: [[String:String]]!
     
     var timerIsOn: Bool = false
+    var sliderTimer: Timer!
     var currentIndex = 0
     var warmUpCount = 0
     
-    var sliderTimer: Timer!
+    var countTimer: Timer!
     var timerDescriptor: Int = 0
     var timerInterval: Double = 5
     
@@ -101,7 +102,7 @@ class ViewController: UIViewController {
      */
     @IBAction func showTimerSetting() {
         
-        showTimerIntervalSetting()
+        presentAlertView()
     }
     
     /*

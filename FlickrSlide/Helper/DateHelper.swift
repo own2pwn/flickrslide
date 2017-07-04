@@ -12,8 +12,7 @@ class DateHelper {
 
     static let shared = DateHelper()
     
-    fileprivate init() {
-        //        println(__FUNCTION__)
+    private init() {
     }
     
     /*

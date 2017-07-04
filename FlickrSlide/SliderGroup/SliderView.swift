@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension ViewController {
     
@@ -16,17 +17,27 @@ extension ViewController {
         
         let arr = target == ArrayPosition.current ? self.photoArr : self.nextPageArr
         
-        for item in arr! {
+        if let arr = arr, arr.count > 0 {
             
-            let url = URL(string: item["url"]!)
-            if let url = url {
+            for item in arr {
                 
-                tmpImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) {
-                    image, error, cacheType, imageURL in
+                let url = URL(string: item["url"]!)
+                if let url = url {
                     
-                    self.warmUpCount += 1
-                    self.switchView(target: target)
+                    tmpImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) {
+                        image, error, cacheType, imageURL in
+                        
+                        self.warmUpCount += 1
+                        self.switchView(target: target)
+                    }
                 }
+            }
+        } else {
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+                
+                print("try again..")
+                self.warmUp(target: target)
             }
         }
     }
@@ -35,7 +46,7 @@ extension ViewController {
         
         let arr = target == ArrayPosition.current ? self.photoArr : self.nextPageArr
         
-        if self.warmUpCount == arr?.count {
+        if let arr = arr, self.warmUpCount == arr.count {
             
             if target == ArrayPosition.current {
                 
@@ -57,10 +68,9 @@ extension ViewController {
         
         if !timerIsOn {
             
-            titleLabel.text = photoArr[currentIndex]["title"]
-            setModelInSliderView()
+            moveNextFeed()
             
-            Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(moveNextFeed), userInfo: nil, repeats: true)
+            activateSliderTimer()
         }
         
         timerIsOn = true
@@ -84,44 +94,55 @@ extension ViewController {
     
     func setModelInSliderView() {
         
-        timerDescriptor = Int(timerInterval)
-        timerDescription()
-        if let timer = sliderTimer, timer.isValid {
-            timer.invalidate()
-        }
-        sliderTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerDescription), userInfo: nil, repeats: true)
+        activateCountTimer()
         
+        UIView.animate(withDuration: 0.2, animations: {
         
-        UIView.animate(withDuration: 0.1, animations: {
-            
             self.photoView.alpha = 0
             self.titleLabel.alpha = 0
             self.publishedLabel.alpha = 0
-        }) {
-            _ in
+        })
+        
+        UIView.animate(withDuration: 0.2, animations: {
+        
+            self.photoView.alpha = 1
+            self.titleLabel.alpha = 1
+            self.publishedLabel.alpha = 1
             
-            UIView.animate(withDuration: 0.2, animations: {
-                
-                let url = URL(string: self.photoArr[self.currentIndex]["url"]!)
-                if let url = url {
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.titleLabel.text = self.photoArr[self.currentIndex]["title"]?.nvr("untitled")
                     
-                    self.photoView.kf.setImage(with: url, placeholder: nil, options: nil)
+                    let formattedDate = DateHelper.shared.convertDateFormat(self.photoArr[self.currentIndex]["published"]!,
+                                                                            currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                            convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
+                    self.publishedLabel.text = "Published at \(formattedDate)"
                 }
+            }
+            
+            let url = URL(string: self.photoArr[self.currentIndex]["url"]!)
+            if let url = url {
                 
-                self.titleLabel.text = self.photoArr[self.currentIndex]["title"]?.nvr("untitled")
-                
-                let formattedDate = DateHelper.shared.convertDateFormat(self.photoArr[self.currentIndex]["published"]!,
-                                                    currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
-                                                    convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
-                self.publishedLabel.text = "Published at \(formattedDate)"
-                
-                self.photoView.alpha = 1
-                self.titleLabel.alpha = 1
-                self.publishedLabel.alpha = 1
-            })
-        }
+                self.photoView.kf.setImage(with: url, placeholder: nil, options: nil)
+            }
+        })
         
         currentIndex += 1
+    }
+    
+    func activateSliderTimer() {
+        
+        sliderTimer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(moveNextFeed), userInfo: nil, repeats: true)
+    }
+    
+    func activateCountTimer() {
+        
+        timerDescriptor = Int(timerInterval)
+        timerDescription()
+        if let timer = countTimer, timer.isValid {
+            timer.invalidate()
+        }
+        countTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerDescription), userInfo: nil, repeats: true)
     }
     
     func timerDescription() {
@@ -140,9 +161,18 @@ extension ViewController {
         print("preloaded => current")
     }
     
-    func showTimerIntervalSetting() {
-
-        presentAlertView()
+    func updateTimerInterval() {
+        
+        if let timer = sliderTimer, timer.isValid {
+            
+            timer.invalidate()
+            activateSliderTimer()
+        }
+        
+        if let timer = countTimer, timer.isValid {
+            
+            timer.invalidate()
+            activateCountTimer()
+        }
     }
-    
 }

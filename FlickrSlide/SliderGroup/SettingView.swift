@@ -122,6 +122,8 @@ extension ViewController {
         
         timerInterval = Double(Int(slidingView.value))
         dismissAlertView()
+        
+        updateTimerInterval()
     }
 
 }

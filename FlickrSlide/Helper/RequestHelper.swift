@@ -12,10 +12,10 @@ import SWXMLHash
 
 class RequestHelper {
     
+    static let shared = RequestHelper()
+    
     private init() {
     }
-    
-    static let shared = RequestHelper()
     
     func requestGet(_ requestUrl : String, completion: @escaping (_ isSuccess: Bool, _ result: XMLIndexer?) -> Void) {
         

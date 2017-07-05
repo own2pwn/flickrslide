@@ -108,6 +108,9 @@ extension ViewController {
     
     func presentAlertView() {
         
+        timeIntervalLabel.text = "\(Int(timerInterval))초"
+        slidingView.value = Float(timerInterval)
+        
         UIView.animate(withDuration: 0.2, animations: {
             self.alertWrapper.alpha = 1
         })

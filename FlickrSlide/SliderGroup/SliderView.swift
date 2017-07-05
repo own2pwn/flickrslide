@@ -25,7 +25,7 @@ extension ViewController {
                 if let url = url {
                     
                     tmpImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) {
-                        image, error, cacheType, imageURL in
+                        _ in
                         
                         self.warmUpCount += 1
                         self.switchView(target: target)
@@ -118,9 +118,6 @@ extension ViewController {
                                                                     currentDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
                                                                     convertDateFormat: "yyyy년 MM월 dd일 HH시 mm분 ss초")
             self.publishedLabel.text = "Published at \(formattedDate)"
-            
-            self.titleLabel.setNeedsUpdateConstraints()
-            self.publishedLabel.setNeedsUpdateConstraints()
             
             let url = URL(string: self.photoArr[self.currentIndex]["url"]!)
             if let url = url {

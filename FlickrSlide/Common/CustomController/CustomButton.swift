@@ -13,6 +13,9 @@ class CustomButton: UIButton {
     var activityView: UIActivityIndicatorView?
     var tmpAttributedTitle: NSAttributedString?
     
+    /*
+     // MARK: - Add UIActivityIndicator inside of UIButton.
+     */
     func addIndicatorView(style: UIActivityIndicatorViewStyle) {
         if activityView == nil {
             activityView = UIActivityIndicatorView(activityIndicatorStyle: style)
@@ -21,6 +24,9 @@ class CustomButton: UIButton {
         }
     }
     
+    /*
+     // MARK: - Toggle UIActivityIndicator.
+     */
     func toggleIndicatorView(willRun: Bool) {
         if willRun {
             if let ai = activityView {
@@ -37,6 +43,9 @@ class CustomButton: UIButton {
         }
     }
     
+    /*
+     // MARK: - Check the state it's running or not.
+     */
     func isRunning() -> Bool {
         if let ai = activityView {
             return ai.isAnimating

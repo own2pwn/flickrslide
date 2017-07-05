@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var settingBtn: UIButton!
     
+    /// Use two array to prepare next feed models. It's enum value whether it's current or next.
     enum ArrayPosition {
         case current
         case next
@@ -28,16 +29,19 @@ class ViewController: UIViewController {
     
     var photoArr: [[String:String]]!
     var nextPageArr: [[String:String]]!
+    var currentIndex = 0
     
+    /// Variables for setting slider timer.
     var timerIsOn: Bool = false
     var sliderTimer: Timer!
-    var currentIndex = 0
     var warmUpCount = 0
     
+    /// Variables for setting count timer.
     var countTimer: Timer!
     var timerDescriptor: Int = 0
     var timerInterval: Double = 5
-    
+
+    /// Variables for drawing setting view.
     let alertWrapper = UIView()
     let dimBackgroundView = UIView()
     let alertView = UIView()
@@ -58,6 +62,9 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    /*
+     // MARK: - Initialize UI controller's properties and draw alerview first.
+     */
     func initializeVc() {
         
         photoView.contentMode = .scaleAspectFit
@@ -106,7 +113,7 @@ class ViewController: UIViewController {
     }
     
     /*
-     // MARK: - fetch public feed model by Flickr API
+     // MARK: - Fetch public feed model by Flickr API
      */
     func fetchData(target: ArrayPosition, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
@@ -126,7 +133,7 @@ class ViewController: UIViewController {
     }
 
     /*
-     // MARK: - manipulate model as dictionary type
+     // MARK: - Manipulate model as dictionary type
      */
     func manipulateModel(_ items: XMLIndexer) -> [[String:String]] {
         

@@ -11,8 +11,12 @@ import Kingfisher
 
 extension ViewController {
     
+    /*
+     // MARK: - Download and store cache images for warm up. It's possible to show image immediately.
+     */
     func warmUp(target: ArrayPosition) {
         
+        // Use UIImageView for download remote image resource.
         let tmpImageView = UIImageView()
         
         let arr = target == ArrayPosition.current ? self.photoArr : self.nextPageArr
@@ -34,6 +38,7 @@ extension ViewController {
             }
         } else {
             
+            // Try warm up again, if target array isn't prepared yet.
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
                 
                 print("try again..")
@@ -42,12 +47,16 @@ extension ViewController {
         }
     }
     
+    /*
+     // MARK: - Switch view if 시작 button is triggered. And this method also be called by warm up.
+     */
     func switchView(target: ArrayPosition) {
         
         let arr = target == ArrayPosition.current ? self.photoArr : self.nextPageArr
         
         if let arr = arr, self.warmUpCount == arr.count {
             
+            // Play slider only for starting from 시작 button
             if target == ArrayPosition.current {
                 
                 if startBtn.isRunning() == true {
@@ -65,17 +74,25 @@ extension ViewController {
         }
     }
     
+    /*
+     // MARK: - Play slider, implemented by Timer.
+     */
     func playSlider() {
         
         if !timerIsOn {
             
+            // Initial call. Because Timer trigger method after time interval we set.
             moveNextFeed()
+            // Set timer.
             activateSliderTimer()
         }
         
         timerIsOn = true
     }
     
+    /*
+     // MARK: - Move next feed item. If array index is positioned at 2, fetch another public feed and do warm up.
+     */
     func moveNextFeed() {
         
         setModelInSliderView()
@@ -88,14 +105,19 @@ extension ViewController {
             }
         }
         
+        // If current array index go to end, Transit next array to current array.
         if currentIndex == photoArr.count {
             
             transitArray()
         }
     }
     
+    /*
+     // MARK: - set feed model in slider view. Use simple UIView animation for fade in and out.
+     */
     func setModelInSliderView() {
         
+        // Play count label timer for display remain time for next model.
         activateCountTimer()
         
         UIView.animate(withDuration: 0.2, animations: {
@@ -129,11 +151,17 @@ extension ViewController {
         currentIndex += 1
     }
     
+    /*
+     // MARK: - activate slider timer.
+     */
     func activateSliderTimer() {
         
         sliderTimer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(moveNextFeed), userInfo: nil, repeats: true)
     }
     
+    /*
+     // MARK: - activate count label timer.
+     */
     func activateCountTimer() {
         
         timerDescriptor = Int(timerInterval)
@@ -147,6 +175,9 @@ extension ViewController {
         countTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerDescription), userInfo: nil, repeats: true)
     }
     
+    /*
+     // MARK: - set remain time to timer label.
+     */
     func timerDescription() {
         
         if timerDescriptor >= 1 {
@@ -155,8 +186,12 @@ extension ViewController {
         }
     }
     
+    /*
+     // MARK: - Transit next array to current array.
+     */
     func transitArray() {
         
+        // purge image cache for effective memory management.
         purgeImageCache(arr: photoArr)
         
         photoArr = nextPageArr
@@ -165,6 +200,9 @@ extension ViewController {
         print("preloaded => current")
     }
     
+    /*
+     // MARK: - Purge image cache. In this time, it's implemented that only purge when transit array called.
+     */
     func purgeImageCache(arr: [[String:String]]) {
         
         if arr.count > 0 {
@@ -180,7 +218,12 @@ extension ViewController {
         print("purged!")
     }
     
+    /*
+     // MARK: - update timer interval from setting view.
+     */
     func updateTimerInterval() {
+        
+        // There are two cases which is called this method, one is before tap start button and the another.
         
         if let timer = sliderTimer, timer.isValid {
             

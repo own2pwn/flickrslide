@@ -10,18 +10,26 @@ import UIKit
 
 extension ViewController {
     
+    /*
+     // MARK: - Draw setting view. Carry on autolayout way.
+     */
     func drawAlertView() {
         
+        // 1. Whole wrapper
         alertWrapper.alpha = 0
         self.view.addSubview(alertWrapper)
         
+        // 2. Dim background view
+        dimBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        
+        // 2-1. Add single tap gesture for dismiss setting view when user tap dim background view.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissAlertView))
         tapGesture.numberOfTapsRequired = 1
-
         dimBackgroundView.addGestureRecognizer(tapGesture)
-        dimBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.4)
+
         alertWrapper.addSubview(dimBackgroundView)
         
+        // 3. Alert view, consist with corner rounded rectangle.
         alertView.backgroundColor = UIColor.white
         alertView.layer.cornerRadius = 5
         alertView.layer.shadowColor = UIColor.black.cgColor
@@ -30,6 +38,7 @@ extension ViewController {
         alertView.layer.shadowRadius = 10
         alertWrapper.addSubview(alertView)
         
+        // 3-1. 설정 button in Alert view.
         let titleAttributedString = NSMutableAttributedString(string: "설정" as String)
         titleAttributedString.addAttributes([NSForegroundColorAttributeName: UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1),
                                              NSFontAttributeName: UIFont(name: "SFUIText-Regular", size: 18)!], range: NSMakeRange(0, titleAttributedString.length))
@@ -37,12 +46,14 @@ extension ViewController {
         alertAction1Btn.addTarget(self, action: #selector(applyTimerInterval), for: .touchUpInside)
         alertView.addSubview(alertAction1Btn)
         
+        // 3-2. Time interval label in Alert view.
         timeIntervalLabel.text = "\(Int(timerInterval))초"
         timeIntervalLabel.font = UIFont(name: "SFUIText-Regular", size: 18)
         timeIntervalLabel.textColor = UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1)
         timeIntervalLabel.textAlignment = .center
         alertView.addSubview(timeIntervalLabel)
         
+        // 3-3. UISlider for change value in Alert view.
         slidingView.minimumValue = 1
         slidingView.maximumValue = 10
         slidingView.value = Float(timerInterval)
@@ -51,9 +62,13 @@ extension ViewController {
         slidingView.addTarget(self, action: #selector(sliderValueDidChange), for: .valueChanged)
         alertView.addSubview(slidingView)
         
+        // Set up whole constraints.
         setupConstraints()
     }
     
+    /*
+     // MARK: - Set up constraints using nslayoutanchor.
+     */
     func setupConstraints() {
         
         alertWrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -99,6 +114,9 @@ extension ViewController {
         alertWrapper.setNeedsUpdateConstraints()
     }
     
+    /*
+     // MARK: - Dismiss alert view method
+     */
     func dismissAlertView() {
         
         UIView.animate(withDuration: 0.2, animations: {
@@ -106,6 +124,9 @@ extension ViewController {
         })
     }
     
+    /*
+     // MARK: - Present alert view method.
+     */
     func presentAlertView() {
         
         timeIntervalLabel.text = "\(Int(timerInterval))초"
@@ -116,11 +137,17 @@ extension ViewController {
         })
     }
     
+    /*
+     // MARK: - UISlider action handler.
+     */
     func sliderValueDidChange(sender: UISlider) {
         
         timeIntervalLabel.text = "\(Int(sender.value))초"
     }
     
+    /*
+     // MARK: - Apply timer interval method.
+     */
     func applyTimerInterval() {
         
         timerInterval = Double(Int(slidingView.value))

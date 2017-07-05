@@ -17,6 +17,9 @@ class RequestHelper {
     private init() {
     }
     
+    /*
+     // MARK: - Request api by GET way.
+     */
     func requestGet(_ requestUrl : String, completion: @escaping (_ isSuccess: Bool, _ result: XMLIndexer?) -> Void) {
         
         print(requestUrl)

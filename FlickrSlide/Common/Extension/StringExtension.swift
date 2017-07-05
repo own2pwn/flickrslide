@@ -10,6 +10,9 @@ import UIKit
 
 public extension String {
     
+    /*
+     // MARK: - nvr function. replace the string you want if the string is empty or filled with whitespaces.
+     */
     func nvr(_ replace: String = "") -> String {
         
         let trimmedString = self.trimmingCharacters(in: .whitespaces)

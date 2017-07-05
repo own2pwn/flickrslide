@@ -16,7 +16,7 @@ class DateHelper {
     }
     
     /*
-     // MARK: 날짜 포멧 변환
+     // MARK: Change date format.
      */
     func convertDateFormat(_ day: String, currentDateFormat: String, convertDateFormat: String) -> String {
         

@@ -133,7 +133,7 @@ class ViewController: UIViewController {
     }
 
     /*
-     // MARK: - Manipulate model as dictionary type
+     // MARK: - Manipulate model as dictionary type. change collection XML to Dictionary for convenient usage.
      */
     func manipulateModel(_ items: XMLIndexer) -> [[String:String]] {
         

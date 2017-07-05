@@ -3,7 +3,6 @@ use_frameworks!
 
 target 'FlickrSlide' do
 	pod 'Alamofire'
-	pod 'SwiftyJSON'
 	pod 'Kingfisher'
 	pod 'SWXMLHash'
 	
